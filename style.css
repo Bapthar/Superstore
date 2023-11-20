@@ -1,0 +1,120 @@
+.navbar {
+    list-style: none;
+    background-color: #2c2c2c;
+    padding: 2px;
+}
+
+.divnav {
+    background-color: #2c2c2c;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background: linear-gradient(rgb(76, 165, 255), rgb(0, 89, 255));
+}
+
+.navbar .active a {
+    background: linear-gradient(rgb(46, 104, 162), rgb(0, 52, 148));
+}
+
+.product-details {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product-image {
+    flex: 1;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.product-info {
+    flex: 1;
+    max-width: 500px;
+    text-align: left;
+}
+.user-reviews {
+    text-align: left;
+    margin-top: 30px;
+}
+/* Style de base */
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+
+}
+
+.container-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    background-color: #f8f8f8;
+    margin-top: 50px;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+select:hover {
+    background: linear-gradient(rgb(255, 255, 255), rgb(207, 207, 207));
+}
+
+input[type="submit"] {
+    background: linear-gradient(rgb(76, 165, 255), rgb(0, 89, 255));
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(rgb(46, 104, 162), rgb(0, 52, 148));
+}
+
+h2 {
+    margin-top: 20px;
+}
+
