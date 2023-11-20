@@ -6,15 +6,21 @@
     <link href="style.css" rel="stylesheet">
     <title>homepage</title>
 </head>
+
 <body>
-<?php
-$activePage = basename($_SERVER['SCRIPT_NAME']);
-?>
     <nav class="navbar">
         <ul class="navbar">
-            <li><a href="homepage_utilisateur.php">Home</a></li>
+            <li><a href="homepage.php">Home</a></li>
+            <li><a href='deconnexion.php'>Déconnexion</a></li>
             <li><a href="panierPage.php">Panier</a></li>
-            <h2> Bienvenue </h2>
+            <li id="navname-bonjour" style="color: white;">
+            <?php
+            if (isset($_SESSION["pseudo"])) {
+                echo "<li>Bonjour " . $_SESSION["pseudo"] . "</li>";
+            }
+            ?>
+            </div>
+            </li>
         </ul>
     </nav>
 </body>

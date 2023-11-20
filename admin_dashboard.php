@@ -2,7 +2,6 @@
 <?php include 'navbar_admin.php'; ?>
 
 <?php
-// Connexion à la base de données (à remplacer par vos informations)
 $dsn = 'mysql:host=localhost;dbname=SUPERSTORE;charset=utf8';
 $username = 'root';
 $password = 'root';
@@ -14,11 +13,14 @@ try {
     exit;
 }
 
-// Requête SQL pour récupérer les produits
 $query = "SELECT * FROM produit";
 $result = $dbh->query($query);
 
-// Affichage des produits en HTML
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$activePage = basename($_SERVER['SCRIPT_NAME']);
+
 echo '<div style="display: flex; flex-wrap: wrap;">';
 
 foreach ($result as $row) {

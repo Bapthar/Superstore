@@ -38,6 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssii", $pseudo, $mdp, $is_admin, $id_utilisateur);
         $stmt->execute();
         $stmt->close();
+    } elseif (isset($_POST['delete'])) {
+        // Suppression d'un utilisateur
+        $id_utilisateur = $_POST["id_utilisateur"];
+
+        $stmt = $conn->prepare("DELETE FROM utilisateur WHERE id_utilisateur = ?");
+        $stmt->bind_param("i", $id_utilisateur);
+        $stmt->execute();
+        $stmt->close();
     }
 }
 
@@ -46,12 +54,21 @@ $result = $conn->query("SELECT * FROM utilisateur");
 
 ?>
 
+<!-- Affichage des utilisateurs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Utilisateurs</title>
+    <script>
+        function showUserDetails(id, pseudo, mdp, is_admin) {
+            document.getElementById("id_utilisateur").value = id;
+            document.getElementById("pseudo").value = pseudo;
+            document.getElementById("mdp").value = mdp;
+            document.getElementById("is_admin").checked = is_admin == 1;
+        }
+    </script>
 </head>
 <body>
 
@@ -60,43 +77,34 @@ $result = $conn->query("SELECT * FROM utilisateur");
 <!-- Formulaire de création ou de modification d'utilisateur -->
 <form action="" method="post">
     <label for="id_utilisateur">ID :</label>
-    <input type="text" name="id_utilisateur" readonly>
+    <input type="text" name="id_utilisateur" id="id_utilisateur" readonly>
 
     <label for="pseudo">Pseudo :</label>
-    <input type="text" name="pseudo">
+    <input type="text" name="pseudo" id="pseudo">
 
     <label for="mdp">Mot de passe :</label>
-    <input type="text" name="mdp">
+    <input type="text" name="mdp" id="mdp">
 
     <label for="is_admin">Admin :</label>
-    <input type="checkbox" name="is_admin">
+    <input type="checkbox" name="is_admin" id="is_admin">
 
     <input type="submit" name="create" value="Créer">
     <input type="submit" name="update" value="Modifier">
+    <input type="submit" name="delete" value="Supprimer">
 </form>
 
 <!-- Affichage des utilisateurs -->
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Pseudo</th>
-        <th>Mot de passe</th>
-        <th>Admin</th>
-        <th>Actions</th>
-    </tr>
+<select onchange="showUserDetails(this.value, this.options[this.selectedIndex].dataset.pseudo, this.options[this.selectedIndex].dataset.mdp, this.options[this.selectedIndex].dataset.is_admin)">
+    <option value="">Sélectionner un utilisateur</option>
     <?php
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>{$row['id_utilisateur']}</td>";
-        echo "<td>{$row['pseudo']}</td>";
-        echo "<td>{$row['mdp']}</td>";
-        echo "<td>{$row['is_admin']}</td>";
-        echo "<td><a href='?edit={$row['id_utilisateur']}'>Éditer</a></td>";
-        echo "</tr>";
+        echo "<option value='{$row['id_utilisateur']}' data-pseudo='{$row['pseudo']}' data-mdp='{$row['mdp']}' data-is_admin='{$row['is_admin']}'>{$row['pseudo']}</option>";
     }
     ?>
-</table>
+</select>
 
+</body>
+</html>
 <?php
 // Fermer la connexion à la base de données
 $conn->close();

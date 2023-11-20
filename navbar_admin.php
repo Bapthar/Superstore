@@ -7,15 +7,16 @@
     <title>homepage</title>
 </head>
 <body>
-<?php
-$activePage = basename($_SERVER['SCRIPT_NAME']);
-?>
     <nav class="navbar">
         <ul class="navbar">
             <li><a href="admin_dashboard.php">Home</a></li>
-            <li><a href="connection.php">Connexion</a></li>
-            <li><a href="panierPage.php">Panier</a></li>
+            <li><a href='deconnexion.php'>Déconnexion</a></li>
             <li><a href="gestion_admin.php">Gestion Admin</a></li>
+            <?php
+            if (isset($_SESSION["pseudo"])) {
+                echo "<li id='navname'>Bonjour " . $_SESSION["pseudo"] . "</li>";
+            }
+            ?>
         </ul>
     </nav>
 </body>

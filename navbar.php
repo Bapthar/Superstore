@@ -7,9 +7,6 @@
     <title>homepage</title>
 </head>
 <body>
-<?php
-$activePage = basename($_SERVER['SCRIPT_NAME']);
-?>
     <nav class="navbar">
         <ul class="navbar">
             <li><a href="homepage.php">Home</a></li>
